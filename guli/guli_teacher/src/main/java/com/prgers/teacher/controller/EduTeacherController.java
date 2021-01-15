@@ -26,9 +26,24 @@ import java.util.List;
 @Api(tags = "讲师管理")
 @RestController
 @RequestMapping("/teacher")
+@CrossOrigin
 public class EduTeacherController {
 
     private EduTeacherService eduTeacherService;
+
+    //{"code":20000,"data":{"token":"admin"}}
+
+    //模拟登录
+    @PostMapping("/login")
+    public Result login(){
+        return Result.ok().data("token","admin");
+    }
+
+    //{"code":20000,"data":{"roles":["admin"],"name":"admin","avatar":"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"}}
+    @GetMapping("/info")
+    public Result info(){
+        return Result.ok().data("roles","[admin]").data("name","admin").data("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+    }
 
     @ApiOperation("所有讲师列表")
     @GetMapping("/teacherList")
